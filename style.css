@@ -1,0 +1,278 @@
+*{
+  box-sizing: border-box;
+  background-origin: border-box;
+  margin: 0;
+}
+
+/*
+
+  The learning environment should be quiet. In addition to quiet music, 
+  I think web pages should be quiet as well. Specifically, 
+  the color tone of the website should be dark because  
+  the light from the computer screen will not draw the learner's attention 
+  so that he or she can focus on learning.
+*/
+body {
+  background: #000000;
+}
+/* Basis for colour palette comes from 1bit Monitor Glow Palette by Polyducks */
+/* https://lospec.com/palette-list/1bit-monitor-glow */
+/* you're welcome to change the colours if you want or any of the other general page style */
+:root{
+  --col-01:#222323;
+  --col-02:#f0f6f0;
+  --col-03:#5252ff;
+  --col-04:#b6e878;
+  --col-05:#bcbdbc;
+  --col-06:#6f6f6f;
+  --border: 1px solid var(--col-02);
+}
+
+.audio-player-wrapper{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+}
+.full-screen {
+  width: 100%;
+}
+
+/* becuase I want to overlay the play icon on the audio they need to be in their own wrapper */
+.audio-element-wrapper{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  position: relative;
+
+}
+
+
+.album-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.album {
+  width: 150px;
+  height: 150px;
+  position: relative;
+}
+.album-img {
+  width: 150px;
+}
+.rotate {
+  animation: rotate 3s linear infinite;
+}
+
+.stick-img {
+  position: absolute;
+  width: 80px;
+  right: -90px;
+  bottom: -10px;
+  transition: 0.5s;
+}
+.stick-img-active {
+  right: -40px;
+}
+
+/* control the album image rotate when playing */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#audioElement{
+  width: 100%;
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+#heroImage{
+  width: 100%;
+  grid-column: 1/2;
+  grid-row: 1/2;
+  margin-top: 0px;
+  transition: 1s;
+  max-height: 95vh;
+}
+
+.dark-mode {
+  filter: brightness(10%);
+}
+.light-mode {
+  filter: brightness(100%);
+}
+
+#audioPlayOverlay{
+  width: 8rem;
+  height: 8rem;
+  grid-column: 1/2;
+  grid-row: 1/2;
+  justify-self: center;
+  align-self: center;
+  opacity: 0.6;
+  pointer-events: none;
+  display: none;
+}
+
+
+.audio-controls-wrapper{
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  z-index: 100000;
+  height: 100px;
+  bottom: 5%;
+  left: 0;
+  width: 100%;
+  align-items: center;
+}
+
+.full-screen .audio-controls-wrapper {
+  bottom: 20%;
+}
+/* this overwrites the above display:flex - something which is then undone when the JS loads */
+#controlsWrapper{
+  display: none;
+}
+
+.audio-control-button{
+  width: 2rem;
+  height: 2rem;
+  padding: .1rem;
+  border: none;
+  cursor: pointer;
+}
+.audio-control-button:hover{
+  background-color: var(--col-05);
+}
+.audio-control-button:active{
+  background-color: var(--col-06);
+}
+.button-icon{
+  pointer-events: none;
+}
+/* Here I've put the menus controlling full screen, mute and unmute at the top, which only appear when playing */
+.audio-voice-control-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 0px;
+  background: rgba(255, 255, 255, 0.4);
+  z-index: 10000;
+  top: 0px;
+  left: 0;
+  overflow: hidden;
+  transition: 0.5s;
+  display: flex;
+  align-items: center;
+}
+.audio-voice-control-wrapper img {
+  margin-left: 10px;
+  cursor: pointer;
+}
+.audio-voice-control-wrapper-active {
+  height: 50px;
+}
+
+.audio-progress-bar{
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  height: 2rem;
+  flex-grow: 1;
+  cursor: pointer;
+  background-color: var(--col-01);
+  box-shadow: 0 1px 2px var(--col-02) inset;
+}
+::-moz-progress-bar {
+  background-color: var(--col-02);
+}
+
+::-webkit-progress-bar {
+  background-color: var(--col-01);
+  box-shadow: 0 1px 2px var(--col-02) inset;
+}
+::-webkit-progress-value {
+  background-color: var(--col-02);
+}
+
+.timeline-loading{
+  background-image: -moz-repeating-linear-gradient(45deg, var(--col-03) 0% 2%, transparent 2% 4%, red 4%);
+  background-size: 200% 100%;
+  animation: loadingAnimation 4s linear infinite;
+}
+
+@keyframes loadingAnimation {
+  100%{
+    background-position: 50% 0%;
+  }
+}
+
+
+
+.control-button {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  border: 2px solid white;
+  transition: 0.4s;
+}
+/* Changes the shadows of the Play, Fast Forward, and Fast Reverse buttons on mouse hover and slowly enlarges the size of the buttons. */
+.control-button:hover {
+  transform: scale(1.1, 1.1);
+  box-shadow: 0 0 20px #fff;
+}
+.control-button img {
+  transform: scale(0.6, 0.6);
+}
+.backward {
+  margin-right: 20px;
+}
+.forward {
+  margin-left: 20px;
+}
+.control-small-button {
+  width: 55px;
+  height: 55px;
+}
+
+/* Responsive adaptation to realize the display effect under different devices.
+   Use the CSS media query
+*/
+@media screen and (max-width: 767px) {
+  .audio-player-wrapper {
+    width: 100%;
+  }
+  .album {
+    transform: scale(0.6, 0.6);
+    margin-bottom: 30px;
+  }
+  .full-screen .audio-controls-wrapper {
+    bottom: -4%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .audio-player-wrapper {
+    width: 100%;
+  }
+
+}
+
+@media screen and (min-width: 1024px) {
+
+}

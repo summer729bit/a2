@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<!-- YOU NEED TO INCLUDE THE FOLLOWING HTML SOMEWHERE IN YOUR DESIGN -->
+
+<!-- 
+<p class="attribution">
+  "<a target="_blank" rel="noopener noreferrer" href="https://freesound.org/people/Erokia/sounds/516902">Ambient Wave 56 - (MSfxP7 - 78)</a>" by 
+  <a target="_blank" rel="noopener noreferrer" href="https://freesound.org/people/Erokia">Erokia</a> is licensed under 
+  <a target="_blank" rel="noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/?ref=openverse">CC BY-NC 4.0 
+    <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" style="height: 1em; margin-right: 0.125em; display: inline;"></img>
+    <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" style="height: 1em; margin-right: 0.125em; display: inline;"></img>
+    <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" style="height: 1em; margin-right: 0.125em; display: inline;"></img>
+  </a>. 
+</p> 
+-->
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHANGE ME</title>
+    <!-- please add a favicon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost&display=swap">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="playerControls.js" defer></script>
+
+  </head>
+
+  <body>
+
+    <!-- this element holds all of the media player -->
+    <div class="audio-player-wrapper" id="wrapper">
+
+      <!-- this element holds the audio element and the overlay -->
+      <div class="audio-element-wrapper">
+
+        <!-- Here I've put the menus controlling full screen, mute and unmute at the top, which only appear when playing -->
+        <div id="audio-voice" class="audio-voice-control-wrapper">
+          
+          <img src="icons/mute.svg" id="mute" width="30" height="30"/>
+
+          <img src="icons/fullScreen.svg" id="full" width="30" height="30"/>
+        </div>
+
+        <!-- this element holds the audio mute or unmute-->
+        <div class="album-wrapper">
+          <div class="album">
+            <img id="album" src="album.png" class="album-img"/>
+
+            <img id="stick" src="stick.png" class="stick-img"/>
+          </div>
+        </div>
+        <!-- This is just an image placeholder, feel free to replace or not -->
+        <img id="heroImage" class="light-mode" src="./peace.jpg" alt="">
+
+        <audio id="audioElement" controls>
+          <source src="https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/IM-2250/erokia_ambient-wave-56-msfxp7-78.mp3" type="audio/mp3">
+        </audio>
+
+        <img id="audioPlayOverlay" src="./icons/play.svg">
+        <!-- this element holds all of the custom controls -->
+        <div class="audio-controls-wrapper" id="controlsWrapper">
+
+          <!-- this element holds backward the audio progress -->
+          <button id="back" class="control-button control-small-button backward">
+            <img src="icons/rewind.svg"/>
+          </button>
+
+
+          <!-- this element holds audio play or pause -->
+          <button id="play" class="control-button">
+            <img src="icons/play.svg"/>
+          </button>
+
+
+          <!-- this element holds fastforward the audio progress -->
+          <button id="forward" class="control-button control-small-button forward">
+            <img src="icons/fastForward.svg"/>
+          </button>
+
+
+
+
+        </div>
+
+      </div>
+      <progress class="audio-progress-bar" id="progressBar" value="0"></progress>
+
+
+    </div>
+
+  </body>
+
+</html>
